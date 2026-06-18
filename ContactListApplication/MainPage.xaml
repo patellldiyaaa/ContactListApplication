@@ -3,10 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ContactListApplication.MainPage"
              Title="MainPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <CollectionView x:Name="ContactsCollectionView"
+                    IsGrouped="True"
+                    SelectionMode="Single"
+                    SelectionChanged="ContactsCollectionView_SelectionChanged">
+
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate>
+                <Label Text="{Binding GroupName}"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       Padding="15,10"
+                       BackgroundColor="LightGray" />
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="15" ColumnDefinitions="70,*">
+                    <Image Source="{Binding Photo}"
+                           WidthRequest="55"
+                           HeightRequest="55"
+                           Aspect="AspectFill" />
+
+                    <Label Grid.Column="1"
+                           Text="{Binding Name}"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           Margin="15,0,0,0" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+
 </ContentPage>
